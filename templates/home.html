@@ -1,0 +1,65 @@
+<!doctype html>
+<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='styles/styles.css')}}"/>
+<link rel="icon" type="image/icon" href="{{url_for('static',filename='images/palworldicon.png')}}"/>
+
+<title>Welcome to your PalWorld Server Monitor</title>
+<H1 class="center banner">Welcome to your PalWorld Server Monitor</H1>
+<div class="serverbar">
+    <div class="broadcastbar">
+        <label>BROADCAST: </label>
+        <input type="text" id="broadcast_msg" title="Text for broadcast message."/>
+        <button onclick="send_broadcast()" title="Send your broadcast message.">SEND</button>
+    </div>
+    <button onclick="save_world()" title="Save your server world.">SAVE WORLD</button>
+    <button onclick="shutdown()" title="Shutdown server within 30 seconds.">SHUTDOWN</button>    
+</div>
+<label class="center title" id="playercount"></label>
+<div class="server_body">    
+    <div class="padding center">
+        <label class="center title">Online Players</label>
+        <table class='showplayerstable'>
+            <thead>
+            <tr>
+                <th>Name</th> 
+                <th>PlayerId</th>
+                <th>SteamId</th>
+                <th>Kick</th>
+                <th>Ban</th>
+            </tr>
+            </thead>
+            <tbody id='showplayers'>
+            </tbody>
+        </table>
+        <hr/>
+        <label class="center title">Banned List</label>
+        <table class='showplayerstable'>
+            <thead>
+            <tr>
+                <th>SteamId</th>
+                <th>Unban</th>
+            </tr>
+            </thead>
+            <tbody id='bannedplayers'>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="padding">
+        <label class="title" id="ram_title">RAM</label>
+        <div class="barbox" id="myRam">
+            <div class="bar" id="myRamBar"></div>
+            <label class="barperc" id="myRamPerc">0%</label>
+        </div>
+
+        <hr />
+        <label class="title" id="cpu_title">CPU</label>
+        <div class="barbox" id="myCPU">
+            <div class="bar" id="myCPUBar"></div>
+            <label class="barperc" id="myCPUPerc">0%</label>
+        </div>
+    </div>
+</div>
+<script src="{{url_for('static', filename='scripts/home.js')}}">
+    
+</script>
