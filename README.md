@@ -26,7 +26,7 @@ Currently this allows you to:
 
 ---
 
-You will need to create a file called 'config.yaml' and save it in the base folder.  It should look like the follwoing:
+You will need to create a file called 'config.yaml' and save it in the base folder.  It should look like the following:
     
     server: 127.0.0.1
     rcon_port: 25575
