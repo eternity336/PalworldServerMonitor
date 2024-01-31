@@ -10,13 +10,12 @@ Of note I am running everything on a Ubuntu server.  If you decide to run this o
 
 ---
 
-Still working on a few issues:
-- Ban/Kick still doesn't work but functions are in place just needs debugging.
-
 Currently this allows you to:
 - Monitor Online Players
 - See list of Banned Players
-- Unban Players
+- Kick Players
+- Ban Players
+- Unban Players (Requires a server restart to take effect.)
 - Send a broadcast message
 - Restart/Shutdown server after 30 seconds with broadcast warning. (Restart dependent on how you set up the running process.)
 - Save world
