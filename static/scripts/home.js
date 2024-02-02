@@ -7,7 +7,26 @@ function post_data(url, data){
         data: data
     }).done(function(data){
         console.log(data);
+        fade_message(data);
     });
+}
+
+function fade_message(message) {
+    element = document.getElementById('messagebar');
+    var op = 1;  // initial opacity
+    element.innerHTML = message
+    element.style.opacity = op;
+    element.style.display = 'block';
+    setTimeout(10000);
+    var timer = setInterval(function () {
+        if (op <= 0.1){
+            clearInterval(timer);
+            element.style.display = 'none';
+        }
+        element.style.opacity = op;
+        element.style.filter = 'alpha(opacity=' + op * 100 + ")";
+        op -= op * 0.1;
+    }, 300);
 }
 
 function delTable(name){
@@ -25,6 +44,7 @@ function save_world(){
         type: "GET"
     }).done(function(data){
         console.log(data);
+        fade_message(data);
     })
 }
 
@@ -34,6 +54,7 @@ function shutdown(){
         type: "GET"
     }).done(function(data){
         console.log(data);
+        fade_message(data);
     })
 }
 

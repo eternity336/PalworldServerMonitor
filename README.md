@@ -26,12 +26,12 @@ Currently this allows you to:
 
 ---
 
-You will need to create a file called 'config.yaml' and save it in the base folder.  It should look like the following:
+You will need to create a file called '.env' and save it in the base folder.  It should look like the follwoing:
     
-    server: 127.0.0.1
-    rcon_port: 25575
-    rcon_pass: 'password'
-    ban_list_path: '/Pal/Saved/SaveGames/banlist.txt'
+    server=127.0.0.1
+    rcon_port=25575
+    rcon_pass='password'
+    ban_list_path='/Pal/Saved/SaveGames/banlist.txt'
 
 I deployed using gunicorn and developed this using the latest python3.11.
 So make sure you have python3 install and install the requirements.txt using

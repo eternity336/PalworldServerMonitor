@@ -1,7 +1,7 @@
-from palworld_rcon.main import PalworldRcon
 import psutil
-import yaml
 import os
+from palworld_rcon.main import PalworldRcon
+from dotenv import load_dotenv
 from flask import Flask, render_template, jsonify
 from flask import request
 
@@ -9,20 +9,11 @@ app = Flask(__name__)
 
 rcon: PalworldRcon = None
 
-if os.path.isfile("config.yaml"):
-    with open("config.yaml", "r") as config:
-        try:
-            _ = yaml.safe_load(config)
-            server_ip = _['server']
-            rcon_port = _['rcon_port']
-            rcon_pass = _['rcon_pass']
-            ban_list = _['ban_list_path']
-        except:
-            print("Config file is malformed.  See readme.")
-            exit(1)
-else:
-    print("Make sure to add the 'config.yaml'. See readme.")
-    exit(1)
+load_dotenv()
+server_ip = str(os.getenv('server'))
+rcon_port = int(os.getenv('rcon_port'))
+rcon_pass = str(os.getenv('rcon_pass'))
+ban_list = str(os.getenv('ban_list_path'))
 
 def get_rcon() -> PalworldRcon:
     ## Sets up the RCON connection
