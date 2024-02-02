@@ -24,7 +24,7 @@ Currently this allows you to:
 - Monitor RAM usage
 - Monitor CPU usage [Currently this may appear off if you are using a container.  Cause in my environment I am getting the host details.]
 - Xfeed for palworld
-- Shows quick status message onto when you run commands from the interface.
+- Shows quick status message up top when you run commands from the interface.
 
 ---
 
