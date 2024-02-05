@@ -1,6 +1,7 @@
 # PalWorld Server Monitor
 
-<img width="956" alt="Screenshot 2024-01-30 202040" src="https://github.com/eternity336/PalworldServerMonitor/assets/7098793/cff57e31-750c-47bd-a71d-0b558b812900">
+![image](https://github.com/eternity336/PalworldServerMonitor/assets/7098793/7a3f841b-107c-4184-8382-3dcbb22c1b65)
+
 
 Intended as a monitor for your dedicated server.  This is not inheriently secure and I would not advise making this public facing.  However it will work great internally.  It was built with Python, HTML, JQuery and Javascript.  I also used the rcon code from some great work by gavinnn101 refenced below:
 
