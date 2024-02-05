@@ -7,13 +7,14 @@ app = Flask(__name__)
 @app.route("/")
 def home():
     ## Homepage for Monitor 
-    return render_template('home.html', showplayers=commands.showplayers(), player_count=commands.showplayercount())
+    return render_template('home.html', showplayers=commands.showonlineplayers(), player_count=commands.showplayercount())
 
 @app.route("/getdata")
 def get_data():
     ## Data that is refreshed every sec to homepage
     data = {
-        'showplayers':commands.showplayers(), 
+        'showplayers':commands.getplayerlist(), 
+        'onlineplayers':commands.showonlineplayers(), 
         'bannedplayers':commands.get_ban_list(),
         'ram':commands.get_ram(),
         'cpu':commands.get_cpu(),

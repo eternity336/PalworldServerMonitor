@@ -79,17 +79,25 @@ function unbanplayer(id){
     post_data("/unbanplayer", {'id': id})
 }
 
-function create_player_row(player){
+function create_player_row(player, online){
     var playertable = document.getElementById('showplayers');
     var row = playertable.insertRow(-1);
     var namecell = row.insertCell(0);
     var playerid = row.insertCell(1);
     var steamid = row.insertCell(2);
-    var kick = row.insertCell(3);
-    var ban = row.insertCell(4);
+    var datetime = row.insertCell(3);
+    var kick = row.insertCell(4);
+    var ban = row.insertCell(5);
     namecell.innerHTML = player[0];
     playerid.innerHTML = player[1];
     steamid.innerHTML = player[2];
+    console.log("TEST", player[0], online)
+    if(online.includes(player[0])){
+        var datetime_icon = `<img class="online_status" src="static/images/online.png" alt="online"/> ${player[3]}`
+    }else{
+        var datetime_icon = `<img class="online_status" src="static/images/offline.png" alt="offline"/> ${player[3]}`
+    }
+    datetime.innerHTML = datetime_icon;
     const kickbutton = document.createElement('button');
     kickbutton.textContent = 'Kick';
     kickbutton.id = steamid.innerHTML;
@@ -121,10 +129,10 @@ function create_unban_row(playerid){
     unban_btn.appendChild(unbanbutton);
 }
 
-function addPlayers(players){
-    console.log('online', players)
+function addPlayers(players, online){
+    console.log('online', players, online)
     for (let i = 0; i < players.length; i++){
-        create_player_row(players[i])
+        create_player_row(players[i], online)
     }
 }
 
@@ -160,7 +168,7 @@ function refreshData(){
                 cputext.innerHTML = `${cpuperc}%`;
                 delTable('showplayers');
                 delTable('bannedplayers');
-                addPlayers(data.data.showplayers);
+                addPlayers(data.data.showplayers, data.data.onlineplayers);
                 addBannedPlayers(data.data.bannedplayers);
                 set_playercount(data.data.player_count);
             });

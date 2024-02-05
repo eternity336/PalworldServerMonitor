@@ -1,15 +1,33 @@
 from dotenv import load_dotenv
 from palworld_rcon.main import PalworldRcon
+from datetime import datetime as dt
+import sqlite3
 import psutil
 import os
 
 rcon: PalworldRcon = None
+
+con = sqlite3.connect("ded_server.db")
+cur = con.cursor()
+cur.execute("CREATE TABLE if not exists players(name TEXT UNIQUE, playerid INTEGER PRIMARY KEY, steamid INTEGER UNIQUE, time)")
 
 load_dotenv()
 server_ip = str(os.getenv('server'))
 rcon_port = int(os.getenv('rcon_port'))
 rcon_pass = str(os.getenv('rcon_pass'))
 ban_list = str(os.getenv('ban_list_path'))
+
+def save_to_db():
+    players = [line.split(',') for line in run_command("ShowPlayers").split()][1:]
+    [_.append(str(dt.now())) for _ in players]
+    print(players)
+    cur.executemany("REPLACE INTO players VALUES(?,?,?,?)", players)
+    return players
+
+def getplayerlist():
+    save_to_db()
+    cur.execute("Select * from players order by time desc, name desc")
+    return cur.fetchall() 
 
 def get_rcon() -> PalworldRcon:
     ## Sets up the RCON connection
@@ -20,13 +38,13 @@ def run_command(command, args=[]):
     rcon = get_rcon()
     return rcon.run_command(command, args)
 
-def showplayers() -> list:
+def showonlineplayers() -> list:
     ## Grabs a list of players online.
-    return [line.split(',') for line in run_command("ShowPlayers").split()][1:]
-
+    return [_[0] for _ in save_to_db()]
+    
 def showplayercount() -> int:
     ## Shows player count from online player list
-    return len(showplayers())
+    return len(showonlineplayers())
 
 def get_ram():
     ## Gets Ram metrics from server

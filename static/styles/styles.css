@@ -35,6 +35,10 @@ button, input{
   display: grid;
   grid-template-columns:auto 100% auto;
 }
+.online_status{
+  width: 25px;
+  height: 25px;
+}
 .title{
   display: block;
   font-size: large;
@@ -53,9 +57,10 @@ button, input{
 .server_body {
   display: grid;
   grid-template-columns: auto 20% 20%;
+  grid-gap: 1%;
 }
 .padding {
-  width:98%;
+  width: 98%;
   padding: 1%;
 }
 .barbox {
