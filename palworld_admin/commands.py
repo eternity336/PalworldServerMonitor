@@ -19,9 +19,10 @@ ban_list = str(os.getenv('ban_list_path'))
 
 def save_to_db():
     players = [line.split(',') for line in run_command("ShowPlayers").split()][1:]
-    [_.append(str(dt.now())) for _ in players]
+    [_.append(str(dt.now().strftime('%Y-%m-%dT%H:%M:%SZ'))) for _ in players]
     print(players)
     cur.executemany("REPLACE INTO players VALUES(?,?,?,?)", players)
+    con.commit()
     return players
 
 def getplayerlist():

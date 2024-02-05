@@ -14,6 +14,7 @@ Of note I am running everything on a Ubuntu server.  If you decide to run this o
 
 Currently this allows you to:
 - Monitor Online Players
+- Shows Last Time Online
 - See list of Banned Players
 - Kick Players
 - Ban Players

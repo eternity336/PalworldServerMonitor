@@ -1,5 +1,44 @@
 var interval_timer = "";
 
+const removeZero = item => (
+    Object
+      .keys(item)
+      .filter(key => item[key] !== 0)
+      .reduce((newObj, key) => {
+        newObj[key] = item[key];
+        return newObj;
+      }, {})
+  );
+
+function add_s(value){
+    if (value == 1) {
+        return ''
+    }
+    return 's'
+}
+
+function last_Online(online_date){
+    var s = {                                                                  // structure
+        year: 31536000,
+        month: 2592000,
+        week: 604800, // uncomment row to ignore
+        day: 86400,   // feel free to add your own row
+        hour: 3600,
+        minute: 60,
+        //second: 1
+    };
+    
+    var d = Math.abs(online_date - Date.now())/1000;
+    r = {}
+    
+    Object.keys(s).forEach(function(key){
+        r[key] = Math.floor(d / s[key]);
+        d -= r[key] * s[key];
+    });
+    
+    return Object.entries(removeZero(r)).map(([key,value]) => `${value} ${key}${add_s(value)}`).join(" ")
+}
+
 function post_data(url, data){
     $.ajax({
         url: url,
@@ -93,9 +132,9 @@ function create_player_row(player, online){
     steamid.innerHTML = player[2];
     console.log("TEST", player[0], online)
     if(online.includes(player[0])){
-        var datetime_icon = `<img class="online_status" src="static/images/online.png" alt="online"/> ${player[3]}`
+        var datetime_icon = `<img class="online_status" src="static/images/online.png" alt="online"/> ${last_Online(new Date(player[3]))}`
     }else{
-        var datetime_icon = `<img class="online_status" src="static/images/offline.png" alt="offline"/> ${player[3]}`
+        var datetime_icon = `<img class="online_status" src="static/images/offline.png" alt="offline"/> ${last_Online(new Date(player[3]))}`
     }
     datetime.innerHTML = datetime_icon;
     const kickbutton = document.createElement('button');
