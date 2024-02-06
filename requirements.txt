@@ -6,3 +6,4 @@ MarkupSafe==2.1.4
 psutil==5.9.8
 Werkzeug==3.0.1
 python-dotenv==1.0.1
+sqlite_database==0.4.4
