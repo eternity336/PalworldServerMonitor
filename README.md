@@ -77,3 +77,4 @@ Then you can access the site with the http://< serverIP >:8000
 
 If you want a different port then 8000 just add the port to the above config after 0.0.0.0 with :port
 
+https://asciinema.org/a/640762
