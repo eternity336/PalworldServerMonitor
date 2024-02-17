@@ -18,9 +18,8 @@ rcon_pass = str(os.getenv('rcon_pass'))
 ban_list = str(os.getenv('ban_list_path'))
 
 def save_to_db():
-    players = [line.split(',') for line in run_command("ShowPlayers").split()][1:]
+    players = [line.split(',') for line in run_command("ShowPlayers").split('\n') if len(line.split(',')) == 3][1:]
     [_.append(str(dt.now().strftime('%Y-%m-%dT%H:%M:%SZ'))) for _ in players]
-    print(players)
     cur.executemany("REPLACE INTO players VALUES(?,?,?,?)", players)
     con.commit()
     return players
